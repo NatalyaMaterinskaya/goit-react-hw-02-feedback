@@ -1,15 +1,21 @@
+import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
+import { List, ListItem, Btn } from './FeedbackOptions.styled';
+
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
-    <ul>
-      <li>
-        <button onClick={() => onLeaveFeedback(options[0])}>Good</button>
-      </li>
-      <li>
-        <button onClick={() => onLeaveFeedback(options[1])}>Neutral</button>
-      </li>
-      <li>
-        <button onClick={() => onLeaveFeedback(options[2])}>Bad</button>
-      </li>
-    </ul>
+    <List>
+      {options.map(option => (
+        <ListItem key={nanoid()}>
+          <Btn onClick={() => onLeaveFeedback(option)}>{option}</Btn>
+        </ListItem>
+      ))}
+    </List>
   );
+};
+
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
 };
